@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "api_derive",
+    "api_tools",
+    "example"
+]

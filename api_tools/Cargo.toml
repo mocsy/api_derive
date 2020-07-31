@@ -1,0 +1,15 @@
+[package]
+name = "api_tools"
+version = "0.1.0"
+authors = ["Andras Mocsary <nobody@reedwolf.com>"]
+edition = "2018"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "2.0"
+arangoq = "0.3.1"
+futures = "0.3.4"
+log = "0.4.8"
+serde = "1.0.106"
