@@ -8,16 +8,24 @@ mod test;
 
 mod actors;
 mod model;
+mod init;
 mod pages;
-
-use actix::Actor;
-use actix_cors::Cors;
-use actix_identity::{CookieIdentityPolicy, Identity, IdentityService};
-use actix_web::{middleware, web, App, HttpResponse, HttpServer};
-use arangoq::ArangoConnection;
+mod placeholder;
 
 use crate::actors::CreatedActor;
-use pages::*;
+use actix::Actor;
+use actix_cors::Cors;
+use actix_files as fs;
+use actix_identity::{CookieIdentityPolicy, Identity, IdentityService};
+use actix_web::{
+    error::ErrorInternalServerError, middleware, web, App, Error, FromRequest, HttpRequest,
+    HttpResponse, HttpServer,
+};
+use arangoq::ArangoConnection;
+use askama::mime::extension_to_mime_type;
+use bytes::BytesMut;
+use log::{debug, info};
+use pages::config_app;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
@@ -34,6 +42,7 @@ async fn main() -> std::io::Result<()> {
         reqwest::Client::new(),
         arangoq::Context { app_prefix },
     );
+    init::setup(&connection).await;
 
     let cacti = CreatedActor {
         conn: connection.clone(),
@@ -42,6 +51,7 @@ async fn main() -> std::io::Result<()> {
 
     let bind_url =
         std::env::var("BIND_URL").unwrap_or_else(|_| panic!("{} must be set", "BIND_URL"));
+    info!("Listening on http://{}", bind_url);
 
     HttpServer::new(move || {
         App::new()
@@ -60,7 +70,8 @@ async fn main() -> std::io::Result<()> {
                     HttpResponse::Ok().finish()
                 })),
             )
-            // .configure(base_like::config_app)
+            .service(fs::Files::new("/static", "static"))
+            .configure(pages::config_app)
             .wrap(middleware::Logger::default())
     })
     .bind(bind_url)?

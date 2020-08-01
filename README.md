@@ -29,6 +29,10 @@ Stop and remove the docker container. Note: if you keep the volume, you keep the
 docker container ls -a
 docker container stop [container_id]
 docker container rm [container_id]
+
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker rmi $(docker images -q)
 ```
 
 ### Setup test data

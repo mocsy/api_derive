@@ -29,12 +29,19 @@ use validator::Validate;
 )]
 pub struct Post {
     #[author]
-    #[serde(skip_serializing, default)]
+    #[serde(default)]
     #[validate(non_control_character, email)]
     pub author: String,
 
+    #[validate(non_control_character, length(min = 2, max = 300))]
+    pub title: String,
+
     #[validate(non_control_character, length(min = 2, max = 3000))]
     pub content: String,
+
+    #[serde(default)]
+    #[validate(non_control_character, url)]
+    pub image: String,
 }
 
 // impl Post {
