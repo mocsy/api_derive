@@ -131,7 +131,6 @@ dependencies = [
  "pin-project",
  "rand",
  "regex",
- "ring",
  "serde",
  "serde_json",
  "serde_urlencoded",
@@ -166,20 +165,6 @@ dependencies = [
  "serde_urlencoded",
  "sha1",
  "slab",
- "time",
-]
-
-[[package]]
-name = "actix-identity"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a379b0639c293292d71defb8cc1f94c87b7705c904adf044338ad392df77c7a"
-dependencies = [
- "actix-service",
- "actix-web",
- "futures",
- "serde",
- "serde_json",
  "time",
 ]
 
@@ -891,7 +876,6 @@ dependencies = [
  "actix-cors",
  "actix-files",
  "actix-http-test",
- "actix-identity",
  "actix-rt",
  "actix-service",
  "actix-web",

@@ -7,8 +7,9 @@ extern crate validator_derive;
 mod test;
 
 mod actors;
-mod model;
 mod init;
+mod model;
+mod route;
 mod pages;
 mod placeholder;
 
@@ -16,23 +17,15 @@ use crate::actors::CreatedActor;
 use actix::Actor;
 use actix_cors::Cors;
 use actix_files as fs;
-use actix_identity::{CookieIdentityPolicy, Identity, IdentityService};
-use actix_web::{
-    error::ErrorInternalServerError, middleware, web, App, Error, FromRequest, HttpRequest,
-    HttpResponse, HttpServer,
-};
+use actix_web::{middleware, web, App, HttpResponse, HttpServer};
 use arangoq::ArangoConnection;
-use askama::mime::extension_to_mime_type;
-use bytes::BytesMut;
-use log::{debug, info};
-use pages::config_app;
+use log::info;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     dotenv::dotenv().ok();
     env_logger::init();
 
-    let cookie_key = b"moAZVQajijrZeXTZTfiZSgujcCMMB6F7X64uZPt3SGxrzT4XiaHh78TJQ3CCRJYW";
     let db_conn = std::env::var("DB_CONN").expect("DB_CONN is mandatory.");
     let db_name = std::env::var("DB_NAME").expect("DB_NAME is mandatory.");
     let app_prefix: String = std::env::var("DB_COLL_PREFIX").unwrap_or_default();
@@ -58,20 +51,14 @@ async fn main() -> std::io::Result<()> {
             .data(connection.clone())
             .data(cacti.clone())
             .wrap(Cors::new().supports_credentials().max_age(43200).finish())
-            .wrap(IdentityService::new(
-                CookieIdentityPolicy::new(cookie_key)
-                    .name("blog-auth")
-                    // .domain(&site_domain)
-                    .path("/"),
-            ))
             .service(
-                web::resource("/health").route(web::get().to(|id: Identity| {
-                    log::debug!("Identity: {:?}", id.identity());
+                web::resource("/health").route(web::get().to(|| {
                     HttpResponse::Ok().finish()
                 })),
             )
             .service(fs::Files::new("/static", "static"))
             .configure(pages::config_app)
+            .configure(route::config_app)
             .wrap(middleware::Logger::default())
     })
     .bind(bind_url)?

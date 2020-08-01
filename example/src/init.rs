@@ -1,23 +1,14 @@
-use arangoq::{ArangoConnection, Context};
+use arangoq::ArangoConnection;
 use log::debug;
 use serde_json::json;
 
-pub(crate) const DOCUMENT_COLLECTIONS: [&str; 1] = [
-    "posts",
-];
+pub(crate) const DOCUMENT_COLLECTIONS: [&str; 1] = ["posts"];
 
 pub async fn setup(conn: &ArangoConnection) {
     for local_name in DOCUMENT_COLLECTIONS.iter() {
         create_collection(local_name, arangoq::CollectionType::Document, conn).await;
     }
-    ensure_index(
-        "posts",
-        true,
-        true,
-        vec!["title".to_owned()],
-        conn,
-    )
-    .await;
+    ensure_index("posts", true, true, vec!["title".to_owned()], conn).await;
 }
 
 // TODO: cleanup & move this to arangoq

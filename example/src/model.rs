@@ -43,13 +43,3 @@ pub struct Post {
     #[validate(non_control_character, url)]
     pub image: String,
 }
-
-// impl Post {
-//     pub fn new(content: &str, author: &str) -> Self {
-//         return Post {
-//             content: content.to_owned(),
-//             author: author.to_owned(),
-//             ..Default::default()
-//         };
-//     }
-// }
