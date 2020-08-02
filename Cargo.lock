@@ -389,7 +389,7 @@ dependencies = [
 
 [[package]]
 name = "api_derive"
-version = "0.2.2"
+version = "0.3.1"
 dependencies = [
  "proc-macro2 1.0.19",
  "quote 1.0.7",
@@ -719,6 +719,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "contracts"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "28df419eeda40630ea164e12d3ef194bef9efac4cf02bf750f0c9bc7cf67f98a"
+dependencies = [
+ "proc-macro2 0.4.30",
+ "quote 0.6.13",
+ "syn 0.15.44",
+]
+
+[[package]]
 name = "copyless"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -888,11 +899,13 @@ dependencies = [
  "dotenv",
  "env_logger 0.7.1",
  "futures",
+ "heck",
  "insta",
  "json-patch",
  "log",
  "mockito",
  "num-complex",
+ "oas_gen",
  "rand",
  "reqwest",
  "schemars",
@@ -1705,6 +1718,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "oas_gen"
+version = "0.4.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a41fc000563bc361f7e8ab50486f71862f8a9149fdd5734b4836244bce5a8e50"
+dependencies = [
+ "contracts",
+ "heck",
+ "http",
+ "schemars",
+ "serde",
+ "serde_json",
+ "serde_skip",
+]
+
+[[package]]
 name = "object"
 version = "0.20.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2290,6 +2318,12 @@ dependencies = [
  "ryu",
  "serde",
 ]
+
+[[package]]
+name = "serde_skip"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7e7299158ebe1a62d3c9db955d91414ed909f9afcef97960a2015dffc862d8a8"
 
 [[package]]
 name = "serde_urlencoded"

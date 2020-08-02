@@ -4,8 +4,36 @@
 #![forbid(unsafe_code)]
 ```
 
+## Getting started
+This is a REST RUST LFCRUD API and blog engine.
 
+### Easy to use
+The `Post` struct is declared in `model.rs`. Enjoy the full capabilities of [serde](https://serde.rs) and [Keats/validator](https://github.com/Keats/validator) derives.
 
+### CRUD REST API
+All of the **LFCRUD** endpoints are derived for a Post.
+An example [Actix Web 2.0](https://github.com/actix/actix-web) app configuration is provided in `route.rs`.
+
+### Open API specification
+Run `cargo test` to generate an *Open API 3* specification. It is built on [oas_gen](https://github.com/element114/oas_gen).
+
+### Gateway configuration
+This example doesn't come with any access or permission checks, throttling or any other similar features.
+It is designed to be hidden behind an API gateway.
+
+Use [krakend_conf](https://gitlab.com/reed-wolf/krakend_conf) to generate a [Krakend ultra performant api gateway](https://github.com/devopsfaith/krakend) endpoint configuration.
+
+### Using HTML templates
+The `/posts` endpoint renders a [Bootstrap 5](https://github.com/twbs/bootstrap/tree/v5.0.0-alpha1) html template. It is build at compile time with [djc/askama](https://github.com/djc/askama), which is a `jinja2` / `twig` / `liquid` like template toolkit, with more limitations in exchange for performance.
+
+The pages are mounted in the `pages` *mod* and the `askama` templates are placed into the `templates` directory.
+
+Feel free to tinker with them.
+
+### Working with ArangoDB
+Most of the DB interaction was build with the [arangoq](https://github.com/element114/arangoq) query builder. Take a look of what it is capable of, and star it to keep the contributors encouraged.
+
+## How to run the example application
 ### Start the db
 Local Cluster mode:
 ```bash
@@ -48,3 +76,7 @@ docker rmi $(docker images -q)
 - Create a new db and user with password
 - Complete .env with test data
 - Fill the DB
+
+# Final Note
+Most of the Rust crates mentioned on this page or used in this example are looking for contributions. Don't forget to take a look at them if you feel like helping out.
+And remember: Even a star can help.

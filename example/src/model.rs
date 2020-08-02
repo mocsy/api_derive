@@ -1,9 +1,11 @@
 use crate::actors::{Created, CreatedActor};
 use api_derive::{derive_db_fields, Create, Delete, Fetch, GetAll, Replace, Update};
 use arangoq::*;
-use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
+
+#[cfg(test)]
+use schemars::JsonSchema;
 
 /// Represents a `Document` in the `posts` document collection
 ///
@@ -25,8 +27,8 @@ use validator::Validate;
     Replace,
     Delete,
     Validate,
-    JsonSchema,
 )]
+#[cfg_attr(test, derive(JsonSchema))]
 pub struct Post {
     #[author]
     #[serde(default)]

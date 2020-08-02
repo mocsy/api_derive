@@ -3,7 +3,7 @@ use crate::placeholder::*;
 use actix_web::{web, HttpResponse};
 use arangoq::{ArangoConnection, Collection, CollectionType, GetAll};
 use askama::Template;
-use serde::{Deserialize};
+use serde::Deserialize;
 
 #[derive(Template)]
 #[template(path = "post.html", escape = "html")]
@@ -42,7 +42,10 @@ impl ImageGen {
     }
 }
 
-pub async fn posts(conn: web::Data<ArangoConnection>, image_generator: web::Query<ImgOpt>) -> HttpResponse {
+pub async fn posts(
+    conn: web::Data<ArangoConnection>,
+    image_generator: web::Query<ImgOpt>,
+) -> HttpResponse {
     let image_generator = &image_generator.gen;
     let coll_name = conn.context.collection_name("posts");
     let coll = Collection::new(coll_name.as_str(), CollectionType::Document);

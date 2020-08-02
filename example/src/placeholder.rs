@@ -184,7 +184,7 @@ pub(crate) fn generate_image() -> String {
 
 #[cfg(test)]
 mod tests {
-    use super::{generate_fractal_image, generate_image};
+    use super::generate_fractal_image;
 
     #[test]
     fn test_gen_img() {

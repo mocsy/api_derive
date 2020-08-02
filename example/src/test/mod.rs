@@ -1,3 +1,5 @@
+mod api_docs;
+
 use actix::{Actor, Context as ActorContext, Handler, Message, ResponseFuture};
 use actix_service::Service;
 use actix_web::{http::StatusCode, test, web, App};

@@ -9,9 +9,9 @@ mod test;
 mod actors;
 mod init;
 mod model;
-mod route;
 mod pages;
 mod placeholder;
+mod route;
 
 use crate::actors::CreatedActor;
 use actix::Actor;
@@ -51,11 +51,7 @@ async fn main() -> std::io::Result<()> {
             .data(connection.clone())
             .data(cacti.clone())
             .wrap(Cors::new().supports_credentials().max_age(43200).finish())
-            .service(
-                web::resource("/health").route(web::get().to(|| {
-                    HttpResponse::Ok().finish()
-                })),
-            )
+            .service(web::resource("/health").route(web::get().to(|| HttpResponse::Ok().finish())))
             .service(fs::Files::new("/static", "static"))
             .configure(pages::config_app)
             .configure(route::config_app)

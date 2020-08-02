@@ -2,7 +2,10 @@
 It provides List, Fetch, Create, Replace, Update and Delete operations for any model.
 Each is a different derive, so you can choose to skip some of it.
 
-Built on `actix_web`, **ArangoDB** and [arangoq](https://github.com/element114/arangoq) for 'maximum' performance (maybe).
+The design brief:
+Build a *rust* toolkit to be able to hack together **low latency** *rest* apis in a matter of minutes in a modern, distributed, Cloud Native, and [Twelve factor](https://12factor.net/) fashion.
+
+Built on `actix_web`, **ArangoDB** and [arangoq](https://github.com/element114/arangoq) for 'maximum' performance (according to the intention).
 
 ```rust
 use api_derive::{derive_db_fields, Create, Delete, Fetch, GetAll, Replace, Update};
