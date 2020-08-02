@@ -3,7 +3,7 @@ It provides List, Fetch, Create, Replace, Update and Delete operations for any m
 Each is a different derive, so you can choose to skip some of it.
 
 The design brief:
-Build a *rust* toolkit to be able to hack together **low latency** *rest* apis in a matter of minutes in a modern, distributed, Cloud Native, and [Twelve factor](https://12factor.net/) fashion.
+Build a **Rust** toolkit to be able to hack together **low latency** *rest* apis in a matter of minutes in a modern, distributed, Cloud Native, and [Twelve factor](https://12factor.net/) fashion.
 
 Built on `actix_web`, **ArangoDB** and [arangoq](https://github.com/element114/arangoq) for 'maximum' performance (according to the intention).
 

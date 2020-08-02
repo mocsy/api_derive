@@ -5,7 +5,7 @@
 ```
 
 ## Getting started
-This is a REST RUST LFCRUD API and blog engine.
+This is a REST Rust LFCRUD API and blog engine.
 
 ### Easy to use
 The `Post` struct is declared in `model.rs`. Enjoy the full capabilities of [serde](https://serde.rs) and [Keats/validator](https://github.com/Keats/validator) derives.
@@ -31,7 +31,7 @@ The pages are mounted in the `pages` *mod* and the `askama` templates are placed
 Feel free to tinker with them.
 
 ### Working with ArangoDB
-Most of the DB interaction was build with the [arangoq](https://github.com/element114/arangoq) query builder. Take a look of what it is capable of, and star it to keep the contributors encouraged.
+ArangoDB was built from zero in C++ for maximum performance. Today it's built on top of RocksDB. It can be used as a key value store a document store a graph database, and it comes with a powerful query language **AQL**. Combined with a high level query builder it is a convenient weapon. Most of the DB interaction was build with the [arangoq](https://github.com/element114/arangoq) query builder. Take a look of what it is capable of, and give it a star if you like it.
 
 ## How to run the example application
 ### Start the db
