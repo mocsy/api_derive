@@ -58,7 +58,10 @@ pub async fn posts(
                 .into_iter()
                 .map(|p| {
                     let mut p = p;
-                    p.image = format!("data:image/png;base64,{}", image_generator.generate());
+                    log::debug!("{:#?}", p.image);
+                    if p.image.is_empty() {
+                        p.image = format!("data:image/png;base64,{}", image_generator.generate());
+                    }
                     p
                 })
                 .collect();
