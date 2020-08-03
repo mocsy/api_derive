@@ -1,5 +1,7 @@
 # A blog engine with `api_derive`
 ![alt text](static/posts.png)
+Comes with a react-admin ui built on the API:
+![alt text](static/posts_admin.png)
 ```rust
 #![forbid(unsafe_code)]
 ```
