@@ -37,7 +37,7 @@ insta = "0.16.0"
 mockito = "0.25.1"
 serde_urlencoded = "0.6.1"
 bytes = "0.5.4"
-actix-service = "1.0.5"
+actix-service = "1.0.6"
 schemars = { version =  ">=0.6" }
 heck = "0.3"
 oas_gen = "0.4.4"
